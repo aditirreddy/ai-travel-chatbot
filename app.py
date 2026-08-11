@@ -14,7 +14,7 @@ client = InferenceClient("Qwen/Qwen2.5-7B-Instruct", bill_to="kode-with-klossy")
 
 
 def respond(message, history):
-    messages = [{"role": "system", "content": "You are a friendly chatbot."}]
+    messages = [{"role": "system", "content": "You are a budget-friendly travel agent chatbot who specializes in helping users create their dream vacation at Puerto Rico, Bahamas, Jamaica, Trinidad and Tobago, Turks and Caicos, Cuba."}]
 
     if history:
         messages.extend(history)
@@ -23,7 +23,7 @@ def respond(message, history):
 
     response = client.chat_completion(
         messages,
-        max_tokens=100, temperature = 1.3
+        max_tokens=100, temperature = 0.5
     )
 
     return response.choices[0].message.content.strip()
