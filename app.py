@@ -1,6 +1,6 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
-from datasets import load_dataset
+
 
 # This is the same pattern from the Generative AI lesson! It uses the
 # Inference Provider API to send your messages to an AI model and get
@@ -12,11 +12,20 @@ from datasets import load_dataset
 # (Settings -> Variables and secrets -> New secret).
 
 
+with open("Bahamas1.txt", "r", encoding="utf-8") as file:
+    Bahamas_text = file.read()
 
-dataset = load_dataset("ChakrikaCodes15/IslandSources")
+with open("Bahamas2.txt", "r", encoding="utf-8") as file:
+    Bahamas_text =  Bahamas_text.append("\n"file.read())
+
+with open("Bahamas3.txt", "r", encoding="utf-8") as file:
+    Bahamas_text =  Bahamas_text.append("\n"file.read())
+
+print(Bahamas_text)
 
 
-print(dataset)
+
+
 
 client = InferenceClient("Qwen/Qwen2.5-7B-Instruct", bill_to="kode-with-klossy")
 
