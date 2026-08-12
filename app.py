@@ -1,6 +1,8 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
 import glob
+from sentence_transformers import SentenceTransformer
+import torch
 
 # This is the same pattern from the Generative AI lesson! It uses the
 # Inference Provider API to send your messages to an AI model and get
