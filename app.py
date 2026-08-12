@@ -40,6 +40,8 @@ def preprocess_text(text):
     print(len(cleaned_chunks))
     return cleaned_chunks
 
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
 def create_embeddings(text_chunks):
   # Convert each text chunk into a vector embedding and store as a tensor
   chunk_embeddings = model.encode(text_chunks, convert_to_tensor=True) # Replace ... with the cleaned_chunks list
