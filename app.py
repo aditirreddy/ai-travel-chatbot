@@ -113,9 +113,10 @@ def respond(message, history):
 
     return response.choices[0].message.content.strip()
 
-chatbot = gr.ChatInterface(respond)
+with gr.blocks() as demo:
+    chatbot = gr.ChatInterface(respond)
 
-chatbot.launch()
+demo.launch()
 
 
 # TODO: This is just a starting point! Customize the system prompt,
