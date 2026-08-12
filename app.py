@@ -1,6 +1,6 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
-
+import glob
 
 # This is the same pattern from the Generative AI lesson! It uses the
 # Inference Provider API to send your messages to an AI model and get
@@ -12,34 +12,16 @@ from huggingface_hub import InferenceClient
 # (Settings -> Variables and secrets -> New secret).
 
 
-with open("Bahamas1.txt", "r", encoding="utf-8") as file:
-    Bahamas_text1 = file.read()
+all_text = ""
 
-with open("Bahamas2.txt", "r", encoding="utf-8") as file:
-    Bahamas_text2 = file.read()
+text_files = glob.glob("*.txt")
 
-with open("Bahamas3.txt", "r", encoding="utf-8") as file:
-    Bahamas_text3 = file.read()
+for filename in text_files:
+    with open(filename, "r", encoding="utf-8") as file:
+        file_text = file.read()
+        all_text += "\n" + file_text
 
-bahamas_text=Bahamas_text1+"\n"+Bahamas_text2+"\n"+Bahamas_text3
-print(bahamas_text)
-
-
-with open("Cuba1.txt", "r", encoding="utf-8") as file:
-    Cuba_text1 = file.read()
-
-with open("Cuba2.txt", "r", encoding="utf-8") as file:
-    Cuba_text2 = file.read()
-
-with open("Cuba3.txt", "r", encoding="utf-8") as file:
-    Cuba_text3 = file.read()
-
-cuba_text=Cuba_text1+"\n"+Cuba_text2+"\n"+Cuba_text3
-print(cuba_text)
-
-
-
-
+print(all_text)
 
 
 client = InferenceClient("Qwen/Qwen2.5-7B-Instruct", bill_to="kode-with-klossy")
