@@ -16,10 +16,10 @@ with open("Bahamas1.txt", "r", encoding="utf-8") as file:
     Bahamas_text = file.read()
 
 with open("Bahamas2.txt", "r", encoding="utf-8") as file:
-    Bahamas_text =  Bahamas_text.append("\n"file.read())
+    Bahamas_text =  Bahamas_text.append("\n"+file.read())
 
 with open("Bahamas3.txt", "r", encoding="utf-8") as file:
-    Bahamas_text =  Bahamas_text.append("\n"file.read())
+    Bahamas_text =  Bahamas_text.append("\n"+file.read())
 
 print(Bahamas_text)
 
