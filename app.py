@@ -25,6 +25,20 @@ bahamas_text=Bahamas_text1+"\n"+Bahamas_text2+"\n"+Bahamas_text3
 print(bahamas_text)
 
 
+with open("Cuba1.txt", "r", encoding="utf-8") as file:
+    Cuba_text1 = file.read()
+
+with open("Cuba2.txt", "r", encoding="utf-8") as file:
+    Cuba_text2 = file.read()
+
+with open("Cuba3.txt", "r", encoding="utf-8") as file:
+    Cuba_text3 = file.read()
+
+cuba_text=Cuba_text1+"\n"+Cuba_text2+"\n"+Cuba_text3
+print(cuba_text)
+
+
+
 
 
 
