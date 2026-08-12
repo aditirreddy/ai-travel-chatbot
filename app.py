@@ -51,11 +51,49 @@ def create_embeddings(text_chunks):
   # Return the chunk_embeddings
   return chunk_embeddings
 
+def get_top_chunks(query, chunk_embeddings, text_chunks):
+  # Convert the query text into a vector embedding
+  query_embedding = model.encode(query, convert_to_tensor=True) # Complete this line
+
+  # Normalize the query embedding to unit length for accurate similarity comparison
+  query_embedding_normalized = query_embedding / query_embedding.norm()
+
+  # Normalize all chunk embeddings to unit length for consistent comparison
+  chunk_embeddings_normalized = chunk_embeddings / chunk_embeddings.norm(dim=1, keepdim=True)
+
+  # Calculate cosine similarity between all chunks and the query using matrix multiplication
+  similarities = torch.matmul(chunk_embeddings_normalized, query_embedding_normalized) # Complete this line
+
+  # Print the similarities
+  print(similarities)
+
+  # Find the indices of the 3 chunks with highest similarity scores
+  top_indices = torch.topk(similarities, k=3).indices
+
+  # Print the top indices
+  print(top_indices)
+
+  # Create an empty list to store the most relevant chunks
+  top_chunks = []
+
+  # Loop through the top indices and retrieve the corresponding text chunks
+  # This is only one way scholars may write this, but there are other ways!
+  for i in top_indices:
+    chunk = text_chunks[i]
+    top_chunks.append(chunk)
+
+  # ===== SPICY CHALLENGE: LIST COMPREHENSION =====
+  # top_chunks = [chunks[i] for i in top_indices]
+
+  # Return the list of most relevant chunks
+  return top_chunks
+
 
 def respond(message, history):
     # ===== APPLY THE COMPLETE WORKFLOW =====
     all_cleaned_chunks = preprocess_text(all_text)
     all_chunk_embeddings = create_embeddings(all_cleaned_chunks)
+    top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
     
     messages = [{"role": "system", "content": "You are a budget-friendly travel agent chatbot who specializes in helping users create their dream vacation at Puerto Rico, Bahamas, Jamaica, Trinidad and Tobago, Turks and Caicos, Cuba."}]
 
