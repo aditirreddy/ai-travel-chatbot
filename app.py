@@ -113,8 +113,12 @@ def respond(message, history):
 
     return response.choices[0].message.content.strip()
 
-with gr.blocks() as demo:
-    chatbot = gr.ChatInterface(respond)
+with gr.Blocks() as demo:
+    with gr.Column():
+        with gr.Row():
+            gr.Markdown("# Travel Tropical")
+        with gr.Row():
+            gr.ChatInterface(respond)
 
 demo.launch()
 
