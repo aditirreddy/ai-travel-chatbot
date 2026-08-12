@@ -1,5 +1,5 @@
 gradio
 huggingface_hub
 sentence-transformers
-tourch
+torch
 numpy
