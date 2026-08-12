@@ -1,5 +1,6 @@
 import gradio as gr
 from huggingface_hub import InferenceClient
+from datasets import load_dataset
 
 # This is the same pattern from the Generative AI lesson! It uses the
 # Inference Provider API to send your messages to an AI model and get
@@ -9,6 +10,13 @@ from huggingface_hub import InferenceClient
 # Note: if this Space doesn't already have one, you'll need to add an
 # HF_TOKEN secret in the Space's Settings tab for this to work
 # (Settings -> Variables and secrets -> New secret).
+
+
+
+dataset = load_dataset("IslandSources")
+
+
+print(dataset)
 
 client = InferenceClient("Qwen/Qwen2.5-7B-Instruct", bill_to="kode-with-klossy")
 
