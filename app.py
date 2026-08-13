@@ -98,7 +98,7 @@ def respond(message, history, user_location):
 
     if user_location == "Bahamas":
         Bahamas_text = ""
-        Bahamas_files = glob.glob("Bahamas*.txt")
+        Bahamas_files = glob.glob("*Bahamas.txt")
         for filename in Bahamas_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
@@ -114,7 +114,7 @@ def respond(message, history, user_location):
 
     elif user_location == "Cuba":
         Cuba_text = ""
-        Cuba_files = glob.glob("Cuba*.txt")
+        Cuba_files = glob.glob("*Cuba.txt")
         for filename in Cuba_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
@@ -130,7 +130,7 @@ def respond(message, history, user_location):
 
     elif user_location == "Jamaica":
         Jamaica_text = ""
-        Jamaica_files = glob.glob("Jamaica*.txt") + glob.glob("jamaica*.txt")
+        Jamaica_files = glob.glob("*Jamaica.txt") 
         for filename in Jamaica_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
@@ -146,7 +146,7 @@ def respond(message, history, user_location):
 
     elif user_location == "Puerto Rico":
         PuertoRico_text = ""
-        PuertoRico_files = glob.glob("Puerto_Rico*.txt") + glob.glob("PuertoRico*.txt")
+        PuertoRico_files = glob.glob("*PuertoRico.txt")
         for filename in PuertoRico_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
@@ -162,7 +162,7 @@ def respond(message, history, user_location):
 
     elif user_location == "Trinidad and Tobago":
         TrinidadandTobago_text = ""
-        TrinidadandTobago_files = glob.glob("Trinidad_Tobago*.txt") + glob.glob("TrinidadandTobago*.txt")
+        TrinidadandTobago_files =  glob.glob("*TrinidadandTobago.txt")
         for filename in TrinidadandTobago_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
@@ -178,11 +178,9 @@ def respond(message, history, user_location):
 
     elif user_location == "Turks and Caicos":
         TurksandCaicos_text = ""
-        TurksandCaicos_files = (
-            glob.glob("TC.*.txt")
-            + glob.glob("TurksandCaicos*.txt")
-            + glob.glob("Turks_and_Caicos*.txt")
-        )
+        TurksandCaicos_files = glob.glob("*TurksandCaicos.txt")
+            
+        
         for filename in TurksandCaicos_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
