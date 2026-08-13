@@ -23,7 +23,7 @@ for filename in text_files:
         file_text = file.read()
         all_text += "\n" + file_text
 
-print(all_text)
+#print(all_text)
 
 
 client = InferenceClient("Qwen/Qwen2.5-7B-Instruct", bill_to="kode-with-klossy")
