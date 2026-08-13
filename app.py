@@ -292,8 +292,6 @@ with gr.Blocks(title="Camera Translator") as demo:
         outputs=[extracted_output, translated_output]
     )
 
-if __name__ == "__main__":
-
 custom_theme = gr.themes.Soft(
     primary_hue="teal",
     secondary_hue="fuchsia", 
