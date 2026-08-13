@@ -192,7 +192,7 @@ def respond(message, history):
 custom_theme = gr.themes.Soft(
     primary_hue="pink",
     secondary_hue="fuchsia", 
-    neutral_hue="purple",
+    neutral_hue="blue",
     spacing_size="lg",
     radius_size="lg",
     text_size="lg",
