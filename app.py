@@ -122,7 +122,7 @@ with gr.Blocks(theme=gr.themes.Ocean()) as demo:
         with gr.Row():
             gr.ChatInterface(respond)
 
-demo.launch()
+demo.launch(theme=gr.themes.Ocean())
 
 
 # TODO: This is just a starting point! Customize the system prompt,
