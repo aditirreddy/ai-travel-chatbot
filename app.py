@@ -4,7 +4,6 @@ import glob
 from sentence_transformers import SentenceTransformer
 import torch
 from transformers import pipeline
-import pytesseract
 from PIL import Image
 
 # This is the same pattern from the Generative AI lesson! It uses the
@@ -246,6 +245,7 @@ TRAVEL KNOWLEDGE BASE CONTEXT:
 
 # 1. Initialize Hugging Face translation pipeline
 # By default, this uses a MarianMT model for English-to-French translation
+ocr_pipe = pipeline("image-to-text", model="microsoft/trocr-base-printed")
 translator = pipeline("translation_en_to_fr", model="Helsinki-NLP/opus-mt-en-fr")
 
 def translate_image(image, target_lang):
