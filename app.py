@@ -116,7 +116,7 @@ def respond(message, history):
 custom_theme = gr.themes.Soft(
     primary_hue="pink",
     secondary_hue="fuchsia", 
-    neutral_hue="cream",
+    neutral_hue="purple",
     spacing_size="lg",
     radius_size="lg",
     text_size="lg",
@@ -129,6 +129,12 @@ with gr.Blocks(theme=custom_theme) as demo:
             gr.Markdown("# Travel Tropical")
         with gr.Row():
             gr.ChatInterface(respond)
+
+    with gr.Column():
+      with gr.row():
+          name=gr.Textbox(placeholder="Type your name", label="Name") 
+          user_location=gr.CheckBoxGroup(["Puerto Rico", "Bahamas", "Jamaica", "Trinidad and Tobago", "Turks and Caicos", "Cuba"], label="Where do you want to go?")
+     
 
 demo.launch(ssr_mode=False)
 
