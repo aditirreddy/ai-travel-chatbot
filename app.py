@@ -3,6 +3,9 @@ from huggingface_hub import InferenceClient
 import glob
 from sentence_transformers import SentenceTransformer
 import torch
+from transformers import pipeline
+import pytesseract
+from PIL import Image
 
 # This is the same pattern from the Generative AI lesson! It uses the
 # Inference Provider API to send your messages to an AI model and get
@@ -240,6 +243,56 @@ TRAVEL KNOWLEDGE BASE CONTEXT:
     )
 
     return response.choices[0].message.content.strip()
+
+# 1. Initialize Hugging Face translation pipeline
+# By default, this uses a MarianMT model for English-to-French translation
+translator = pipeline("translation_en_to_fr", model="Helsinki-NLP/opus-mt-en-fr")
+
+def translate_image(image, target_lang):
+    if image is None:
+        return "Please upload or capture an image.", ""
+    
+    # 2. Extract text from image using OCR
+    # Note: Requires Tesseract-OCR installed on your system
+    try:
+        extracted_text = pytesseract.image_to_string(image)
+    except Exception as e:
+        return f"Error reading text: {str(e)}", ""
+
+    if not extracted_text.strip():
+        return "No readable text found in the image.", ""
+
+    # 3. Translate extracted text using Hugging Face pipeline
+    try:
+        translation = translator(extracted_text)
+        translated_text = translation[0]['translation_text']
+    except Exception as e:
+        return extracted_text, f"Translation error: {str(e)}"
+
+    return extracted_text, translated_text
+
+# 4. Create Gradio Interface
+with gr.Blocks(title="Camera Translator") as demo:
+    gr.Markdown("# 📷 AI Camera Translator")
+    gr.Markdown("Capture or upload an image containing English text to translate it to French.")
+    
+    with gr.Row():
+        with gr.Column():
+            # Enabling sources=["webcam", "upload"] lets users capture directly from a camera
+            input_img = gr.Image(sources=["webcam", "upload"], type="pil", label="Input Image")
+            submit_btn = gr.Button("Extract & Translate", variant="primary")
+        
+        with gr.Column():
+            extracted_output = gr.Textbox(label="Detected Text (English)", lines=4)
+            translated_output = gr.Textbox(label="Translated Text (French)", lines=4)
+
+    submit_btn.click(
+        fn=translate_image,
+        inputs=[input_img],
+        outputs=[extracted_output, translated_output]
+    )
+
+if __name__ == "__main__":
 
 custom_theme = gr.themes.Soft(
     primary_hue="teal",
