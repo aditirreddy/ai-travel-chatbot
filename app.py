@@ -166,7 +166,7 @@ def respond(message, history):
 
         
         TurksandCaicos_cleaned_chunks = preprocess_text(TurksandCaicos_text)
-        TurksandCaicos_chunk_embeddings = create_embeddings(Turksand aicos_cleaned_chunks)
+        TurksandCaicos_chunk_embeddings = create_embeddings(TurksandCaicos_cleaned_chunks)
         top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
 
     
