@@ -257,7 +257,7 @@ custom_theme = gr.themes.Soft(
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
         with gr.Row():
-            gr.Image("Travel_Tropical_Banner")
+            gr.Image("Travel_Tropical_Banner.png")
             gr.Markdown("# Travel Tropical")
 
         with gr.Row():
