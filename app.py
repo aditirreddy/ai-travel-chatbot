@@ -207,7 +207,7 @@ def respond(message, history, user_location):
         "content": f"""
 You are a budget-friendly travel agent chatbot.
 
-The user selected {user_location}.
+ {name} selected {user_location}.
 
 You MUST answer using ONLY the information contained in the provided travel knowledge base context.
 
