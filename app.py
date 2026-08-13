@@ -113,16 +113,25 @@ def respond(message, history):
 
     return response.choices[0].message.content.strip()
 
-#custom_theme = gr.Theme( primary_hue="blue",secondary_hue="purple",neutral_hue="slate")
-
-with gr.Blocks(theme=gr.themes.Ocean()) as demo:
+custom_theme = gr.themes.Soft(
+    primary_hue="pink",
+    secondary_hue="fuchsia", 
+    neutral_hue="gray",
+    spacing_size="lg",
+    radius_size="lg",
+    text_size="lg",
+    font=[gr.themes.GoogleFont("IBM Plex Sans"), "sans-serif"],
+    font_mono=[gr.themes.GoogleFont("IBM Plex Mono"), "monospace"]
+)
+with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
         with gr.Row():
             gr.Markdown("# Travel Tropical")
         with gr.Row():
             gr.ChatInterface(respond)
+chatbot.launch(ssr_mode=False, theme=custom_theme)
 
-demo.launch(theme=gr.themes.Ocean())
+demo.launch()
 
 
 # TODO: This is just a starting point! Customize the system prompt,
