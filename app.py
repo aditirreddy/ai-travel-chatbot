@@ -190,7 +190,7 @@ def respond(message, history):
     return response.choices[0].message.content.strip()
 
 custom_theme = gr.themes.Soft(
-    primary_hue="pink",
+    primary_hue="coral",
     secondary_hue="fuchsia", 
     neutral_hue="blue",
     spacing_size="lg",
