@@ -242,53 +242,6 @@ TRAVEL KNOWLEDGE BASE CONTEXT:
 
     return response.choices[0].message.content.strip()
 
-# 1. Load Hugging Face OCR model (reads text from image)
-ocr_pipe = pipeline("image-to-text", model="microsoft/trocr-base-printed")
-
-# 2. Load Hugging Face Translation model (translates English to French)
-translator = pipeline("translation_en_to_fr", model="Helsinki-NLP/opus-mt-en-fr")
-
-def translate_image(image):
-    if image is None:
-        return "Please upload or capture an image.", ""
-
-    try:
-        # Extract text directly using Hugging Face model
-        ocr_result = ocr_pipe(image)
-        extracted_text = ocr_result[0]["generated_text"]
-    except Exception as e:
-        return f"Error reading text: {str(e)}", ""
-
-    if not extracted_text.strip():
-        return "No readable text found.", ""
-
-    try:
-        # Translate the extracted text
-        translation = translator(extracted_text)
-        translated_text = translation[0]["translation_text"]
-    except Exception as e:
-        return extracted_text, f"Translation error: {str(e)}"
-
-    return extracted_text, translated_text
-# 3. Create Gradio Interface
-with gr.Blocks(title="Camera Translator") as demo:
-    gr.Markdown("# 📷 AI Camera Translator")
-
-    with gr.Row():
-        with gr.Column():
-            input_img = gr.Image(sources=["webcam", "upload"], type="pil", label="Input Image")
-            submit_btn = gr.Button("Extract & Translate", variant="primary")
-
-        with gr.Column():
-            extracted_output = gr.Textbox(label="Detected Text (English)", lines=4)
-            translated_output = gr.Textbox(label="Translated Text (French)", lines=4)
-
-    submit_btn.click(
-        fn=translate_image,
-        inputs=[input_img],
-        outputs=[extracted_output, translated_output]
-    )
-
 custom_theme = gr.themes.Soft(
     primary_hue="teal",
     secondary_hue="fuchsia", 
