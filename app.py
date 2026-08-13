@@ -14,14 +14,14 @@ import torch
 # (Settings -> Variables and secrets -> New secret).
 
 
-all_text = ""
+#all_text = ""
 
-text_files = glob.glob("*.txt")
+#text_files = glob.glob("*.txt")
 
-for filename in text_files:
-    with open(filename, "r", encoding="utf-8") as file:
-        file_text = file.read()
-        all_text += "\n" + file_text
+#for filename in text_files:
+    #with open(filename, "r", encoding="utf-8") as file:
+     #   file_text = file.read()
+      #  all_text += "\n" + file_text
 
 #print(all_text)
 
@@ -116,7 +116,7 @@ def respond(message, history):
 custom_theme = gr.themes.Soft(
     primary_hue="pink",
     secondary_hue="fuchsia", 
-    neutral_hue="#faf2e9",
+    neutral_hue="cream",
     spacing_size="lg",
     radius_size="lg",
     text_size="lg",
