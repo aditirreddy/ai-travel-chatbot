@@ -129,9 +129,8 @@ with gr.Blocks(theme=custom_theme) as demo:
             gr.Markdown("# Travel Tropical")
         with gr.Row():
             gr.ChatInterface(respond)
-gr.launch(ssr_mode=False, theme=custom_theme)
 
-demo.launch()
+demo.launch(ssr_mode=False)
 
 
 # TODO: This is just a starting point! Customize the system prompt,
