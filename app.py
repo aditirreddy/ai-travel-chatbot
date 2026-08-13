@@ -131,7 +131,7 @@ with gr.Blocks(theme=custom_theme) as demo:
             gr.ChatInterface(respond)
 
     with gr.Column():
-      with gr.row():
+      with gr.Row():
           name=gr.Textbox(placeholder="Type your name", label="Name") 
           user_location=gr.CheckBoxGroup(["Puerto Rico", "Bahamas", "Jamaica", "Trinidad and Tobago", "Turks and Caicos", "Cuba"], label="Where do you want to go?")
      
