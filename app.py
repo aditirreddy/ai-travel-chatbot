@@ -171,9 +171,7 @@ def respond(message, history):
 
     
     # ===== APPLY THE COMPLETE WORKFLOW =====
-    all_cleaned_chunks = preprocess_text(all_text)
-    all_chunk_embeddings = create_embeddings(all_cleaned_chunks)
-    top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+    
     
     messages = [{"role": "system", "content": "You are a budget-friendly travel agent chatbot who specializes in helping users create their dream vacation at Puerto Rico, Bahamas, Jamaica, Trinidad and Tobago, Turks and Caicos, Cuba."}]
 
