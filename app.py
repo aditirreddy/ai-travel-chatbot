@@ -236,7 +236,7 @@ TRAVEL KNOWLEDGE BASE CONTEXT:
 
     response = client.chat_completion(
         messages,
-        max_tokens=200, temperature=0.2
+        max_tokens=400, temperature=0.2
     )
 
     return response.choices[0].message.content.strip()
