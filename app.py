@@ -27,6 +27,7 @@ import torch
 
 
 client = InferenceClient("Qwen/Qwen2.5-7B-Instruct", bill_to="kode-with-klossy")
+
 def preprocess_text(text):
     cleaned_text = text.strip()
     chunks = cleaned_text.split("\n")
@@ -72,7 +73,7 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
   print(similarities)
 
   # Find the indices of the 3 chunks with highest similarity scores
-  top_indices = torch.topk(similarities, k=3).indices
+  top_indices = torch.topk(similarities, k=min(3, len(text_chunks))).indices
 
   # Print the top indices
   print(top_indices)
@@ -83,7 +84,7 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
   # Loop through the top indices and retrieve the corresponding text chunks
   # This is only one way scholars may write this, but there are other ways!
   for i in top_indices:
-    chunk = text_chunks[i]
+    chunk = text_chunks[int(i)]
     top_chunks.append(chunk)
 
   # ===== SPICY CHALLENGE: LIST COMPREHENSION =====
@@ -93,96 +94,151 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
   return top_chunks
 
 
-def respond(message, history):
+def respond(message, history, user_location):
 
-    if user_location=="Bahamas":
+    if user_location == "Bahamas":
         Bahamas_text = ""
-        Bahamas_files = glob.glob("*Bahamas.txt")
+        Bahamas_files = glob.glob("Bahamas*.txt")
         for filename in Bahamas_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
                 Bahamas_text += "\n" + file_text
 
-        
         Bahamas_cleaned_chunks = preprocess_text(Bahamas_text)
         Bahamas_chunk_embeddings = create_embeddings(Bahamas_cleaned_chunks)
-        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
-        
-    elif user_location=="Cuba":
-        Cuba_text=""
-        Cuba_files = glob.glob("*Cuba.txt")
+        top_chunks = get_top_chunks(
+            message,
+            Bahamas_chunk_embeddings,
+            Bahamas_cleaned_chunks
+        )
+
+    elif user_location == "Cuba":
+        Cuba_text = ""
+        Cuba_files = glob.glob("Cuba*.txt")
         for filename in Cuba_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
                 Cuba_text += "\n" + file_text
 
-        
         Cuba_cleaned_chunks = preprocess_text(Cuba_text)
         Cuba_chunk_embeddings = create_embeddings(Cuba_cleaned_chunks)
-        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
-    elif user_location=="Cuba":
-        Jamaica_text=""
-        Jamaica_files = glob.glob("*Jamaica.txt")
+        top_chunks = get_top_chunks(
+            message,
+            Cuba_chunk_embeddings,
+            Cuba_cleaned_chunks
+        )
+
+    elif user_location == "Jamaica":
+        Jamaica_text = ""
+        Jamaica_files = glob.glob("Jamaica*.txt") + glob.glob("jamaica*.txt")
         for filename in Jamaica_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
                 Jamaica_text += "\n" + file_text
 
-        
         Jamaica_cleaned_chunks = preprocess_text(Jamaica_text)
         Jamaica_chunk_embeddings = create_embeddings(Jamaica_cleaned_chunks)
-        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
-    elif user_location=="Cuba":
-        PuertoRico_text=""
-        PuertoRico_files = glob.glob("*PuertoRico.txt")
+        top_chunks = get_top_chunks(
+            message,
+            Jamaica_chunk_embeddings,
+            Jamaica_cleaned_chunks
+        )
+
+    elif user_location == "Puerto Rico":
+        PuertoRico_text = ""
+        PuertoRico_files = glob.glob("Puerto_Rico*.txt") + glob.glob("PuertoRico*.txt")
         for filename in PuertoRico_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
                 PuertoRico_text += "\n" + file_text
 
-        
         PuertoRico_cleaned_chunks = preprocess_text(PuertoRico_text)
         PuertoRico_chunk_embeddings = create_embeddings(PuertoRico_cleaned_chunks)
-        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
-    elif user_location=="Trinidad and Tobago":
-        TrinidadandTobago_text=""
-        TrinidadandTobago_files = glob.glob("*TrinidadandTobago.txt")
+        top_chunks = get_top_chunks(
+            message,
+            PuertoRico_chunk_embeddings,
+            PuertoRico_cleaned_chunks
+        )
+
+    elif user_location == "Trinidad and Tobago":
+        TrinidadandTobago_text = ""
+        TrinidadandTobago_files = glob.glob("Trinidad_Tobago*.txt") + glob.glob("TrinidadandTobago*.txt")
         for filename in TrinidadandTobago_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
                 TrinidadandTobago_text += "\n" + file_text
 
-        
         TrinidadandTobago_cleaned_chunks = preprocess_text(TrinidadandTobago_text)
         TrinidadandTobago_chunk_embeddings = create_embeddings(TrinidadandTobago_cleaned_chunks)
-        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
-    elif user_location=="TurksandCaicos":
-        TurksandCaicos_text=""
-        TurksandCaicos_files = glob.glob("*TurksandCaicos.txt")
+        top_chunks = get_top_chunks(
+            message,
+            TrinidadandTobago_chunk_embeddings,
+            TrinidadandTobago_cleaned_chunks
+        )
+
+    elif user_location == "Turks and Caicos":
+        TurksandCaicos_text = ""
+        TurksandCaicos_files = (
+            glob.glob("TC.*.txt")
+            + glob.glob("TurksandCaicos*.txt")
+            + glob.glob("Turks_and_Caicos*.txt")
+        )
         for filename in TurksandCaicos_files:
             with open(filename, "r", encoding="utf-8") as file:
                 file_text = file.read()
                 TurksandCaicos_text += "\n" + file_text
 
-        
         TurksandCaicos_cleaned_chunks = preprocess_text(TurksandCaicos_text)
         TurksandCaicos_chunk_embeddings = create_embeddings(TurksandCaicos_cleaned_chunks)
-        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+        top_chunks = get_top_chunks(
+            message,
+            TurksandCaicos_chunk_embeddings,
+            TurksandCaicos_cleaned_chunks
+        )
+
+    else:
+        return "Please choose a destination first."
 
     
     # ===== APPLY THE COMPLETE WORKFLOW =====
     
-    
-    messages = [{"role": "system", "content": "You are a budget-friendly travel agent chatbot who specializes in helping users create their dream vacation at Puerto Rico, Bahamas, Jamaica, Trinidad and Tobago, Turks and Caicos, Cuba."}]
+    context = "\n".join(top_chunks)
+
+    messages = [{
+        "role": "system",
+        "content": f"""
+You are a budget-friendly travel agent chatbot.
+
+The user selected {user_location}.
+
+You MUST answer using ONLY the information contained in the provided travel knowledge base context.
+
+Do not use outside knowledge.
+Do not guess.
+Do not invent attractions, hotels, restaurants, prices, activities, facts, or recommendations.
+
+If the answer cannot be found in the provided context, say:
+"I don't have that information in my travel sources."
+
+Do not claim something is true unless it appears in the context.
+
+TRAVEL KNOWLEDGE BASE CONTEXT:
+
+{context}
+"""
+    }]
 
     if history:
         messages.extend(history)
 
-    messages.append({"role": "user", "content": message})
+    messages.append({
+        "role": "user",
+        "content": message
+    })
 
     response = client.chat_completion(
         messages,
-        max_tokens=200, temperature = 0.5
+        max_tokens=200, temperature=0.2
     )
 
     return response.choices[0].message.content.strip()
@@ -197,18 +253,36 @@ custom_theme = gr.themes.Soft(
     font=[gr.themes.GoogleFont("IBM Plex Sans"), "sans-serif"],
     font_mono=[gr.themes.GoogleFont("IBM Plex Mono"), "monospace"]
 )
+
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
         with gr.Row():
             gr.Markdown("# Travel Tropical")
-        with gr.Row():
-            gr.ChatInterface(respond)
 
-    with gr.Column():
-      with gr.Row():
-          name=gr.Textbox(placeholder="Type your name", label="Name") 
-          user_location=gr.CheckboxGroup(["Puerto Rico", "Bahamas", "Jamaica", "Trinidad and Tobago", "Turks and Caicos", "Cuba"], label="Where do you want to go?")
-     
+        with gr.Row():
+            name = gr.Textbox(
+                placeholder="Type your name",
+                label="Name"
+            )
+
+            user_location = gr.Dropdown(
+                [
+                    "Puerto Rico",
+                    "Bahamas",
+                    "Jamaica",
+                    "Trinidad and Tobago",
+                    "Turks and Caicos",
+                    "Cuba"
+                ],
+                label="Where do you want to go?"
+            )
+
+        with gr.Row():
+            gr.ChatInterface(
+                respond,
+                additional_inputs=[user_location]
+            )
+
 
 demo.launch(ssr_mode=False)
 
