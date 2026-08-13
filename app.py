@@ -94,6 +94,82 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
 
 
 def respond(message, history):
+
+    if user_location=="Bahamas":
+        Bahamas_text = ""
+        Bahamas_files = glob.glob("*Bahamas.txt")
+        for filename in Bahamas_files:
+            with open(filename, "r", encoding="utf-8") as file:
+                file_text = file.read()
+                Bahamas_text += "\n" + file_text
+
+        
+        Bahamas_cleaned_chunks = preprocess_text(Bahamas_text)
+        Bahamas_chunk_embeddings = create_embeddings(Bahamas_cleaned_chunks)
+        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+        
+    elif user_location=="Cuba":
+        Cuba_text=""
+        Cuba_files = glob.glob("*Cuba.txt")
+        for filename in Cuba_files:
+            with open(filename, "r", encoding="utf-8") as file:
+                file_text = file.read()
+                Cuba_text += "\n" + file_text
+
+        
+        Cuba_cleaned_chunks = preprocess_text(Cuba_text)
+        Cuba_chunk_embeddings = create_embeddings(Cuba_cleaned_chunks)
+        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+    elif user_location=="Cuba":
+        Jamaica_text=""
+        Jamaica_files = glob.glob("*Jamaica.txt")
+        for filename in Jamaica_files:
+            with open(filename, "r", encoding="utf-8") as file:
+                file_text = file.read()
+                Jamaica_text += "\n" + file_text
+
+        
+        Jamaica_cleaned_chunks = preprocess_text(Jamaica_text)
+        Jamaica_chunk_embeddings = create_embeddings(Jamaica_cleaned_chunks)
+        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+    elif user_location=="Cuba":
+        PuertoRico_text=""
+        PuertoRico_files = glob.glob("*PuertoRico.txt")
+        for filename in PuertoRico_files:
+            with open(filename, "r", encoding="utf-8") as file:
+                file_text = file.read()
+                PuertoRico_text += "\n" + file_text
+
+        
+        PuertoRico_cleaned_chunks = preprocess_text(PuertoRico_text)
+        PuertoRico_chunk_embeddings = create_embeddings(PuertoRico_cleaned_chunks)
+        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+    elif user_location=="Trinidad and Tobago":
+        TrinidadandTobago_text=""
+        TrinidadandTobago_files = glob.glob("*TrinidadandTobago.txt")
+        for filename in TrinidadandTobago_files:
+            with open(filename, "r", encoding="utf-8") as file:
+                file_text = file.read()
+                TrinidadandTobago_text += "\n" + file_text
+
+        
+        TrinidadandTobago_cleaned_chunks = preprocess_text(TrinidadandTobago_text)
+        TrinidadandTobago_chunk_embeddings = create_embeddings(TrinidadandTobago_cleaned_chunks)
+        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+    elif user_location=="TurksandCaicos":
+        TurksandCaicos_text=""
+        TurksandCaicos_files = glob.glob("*TurksandCaicos.txt")
+        for filename in TurksandCaicos_files:
+            with open(filename, "r", encoding="utf-8") as file:
+                file_text = file.read()
+                TurksandCaicos_text += "\n" + file_text
+
+        
+        TurksandCaicos_cleaned_chunks = preprocess_text(TurksandCaicos_text)
+        TurksandCaicos_chunk_embeddings = create_embeddings(Turksand aicos_cleaned_chunks)
+        top_chunks=get_top_chunks(message,all_chunk_embeddings,all_cleaned_chunks)
+
+    
     # ===== APPLY THE COMPLETE WORKFLOW =====
     all_cleaned_chunks = preprocess_text(all_text)
     all_chunk_embeddings = create_embeddings(all_cleaned_chunks)
@@ -133,7 +209,7 @@ with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
       with gr.Row():
           name=gr.Textbox(placeholder="Type your name", label="Name") 
-          user_location=gr.CheckBoxGroup(["Puerto Rico", "Bahamas", "Jamaica", "Trinidad and Tobago", "Turks and Caicos", "Cuba"], label="Where do you want to go?")
+          user_location=gr.CheckboxGroup(["Puerto Rico", "Bahamas", "Jamaica", "Trinidad and Tobago", "Turks and Caicos", "Cuba"], label="Where do you want to go?")
      
 
 demo.launch(ssr_mode=False)
