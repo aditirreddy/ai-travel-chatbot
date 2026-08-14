@@ -96,7 +96,7 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
 
 
 def respond(message, history, user_location,trip_dates_state,name):
-    print(trip_dates_state)
+    print(name)
     if user_location == "Bahamas":
         Bahamas_text = ""
         Bahamas_files = glob.glob("*Bahamas.txt")
@@ -311,7 +311,7 @@ with gr.Blocks(theme=custom_theme) as demo:
         with gr.Column(scale=3):
             gr.ChatInterface(
                respond,
-               additional_inputs=[user_location,trip_dates_state,name]
+               additional_inputs=[user_location,trip_dates_state,name],additional_inputs_accordion=None
         )
        
     
