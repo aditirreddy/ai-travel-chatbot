@@ -269,6 +269,8 @@ def add_packing_item(new_item, current_list):
 
 def clear_packing_list():
     return "", [], "Your packing list is empty."
+
+packing_state= gr.State([])
     
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
