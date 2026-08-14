@@ -259,6 +259,16 @@ def save_trip_dates(start_date, end_date):
         return "Please select both arrival and departure dates!"
     return f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
 
+# Functions for the To-Do / Packing List state management
+def add_packing_item(new_item, current_list):
+    if new_item.strip():
+        current_list.append(new_item.strip())
+    # Format list into bullet points for display
+    formatted_list = "\n".join([f"• {item}" for item in current_list]) if current_list else "Your packing list is empty."
+    return "", current_list, formatted_list
+
+def clear_packing_list():
+    return "", [], "Your packing list is empty."
     
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
@@ -300,7 +310,41 @@ with gr.Blocks(theme=custom_theme) as demo:
             end_date = gr.DateTime(label="Departure Date", type="string")
             save_dates_btn = gr.Button("Save Dates", variant="secondary")
             date_status = gr.Markdown("No dates saved yet.")
-            
+
+        gr.Divider()
+
+        # --- TO-DO / PACKING LIST SECTION ---
+        gr.Markdown("### 🧳 Packing List")
+        with gr.Group():
+            item_input = gr.Textbox(
+                label="Add Item", 
+                placeholder="e.g., Sunscreen, Passport, Swimsuit...",
+                show_label=False
+            )
+                
+            with gr.Row():
+                add_item_btn = gr.Button("Add", variant="secondary")
+                clear_items_btn = gr.Button("Clear List", variant="stop")
+                
+                # Display area for saved items
+            packing_display = gr.Markdown("Your packing list is empty.")
+
+# Packing List Handlers
+    add_item_btn.click(
+        add_packing_item, 
+        inputs=[item_input, packing_state], 
+        outputs=[item_input, packing_state, packing_display]
+    )
+    item_input.submit(
+        add_packing_item, 
+        inputs=[item_input, packing_state], 
+        outputs=[item_input, packing_state, packing_display]
+    )
+    clear_items_btn.click(
+        clear_packing_list, 
+        outputs=[item_input, packing_state, packing_display]
+    )
+    
 # Calendar Handlers
     save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date], outputs=[date_status])
 demo.launch(ssr_mode=False)
