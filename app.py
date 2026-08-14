@@ -277,7 +277,7 @@ with gr.Blocks(theme=custom_theme) as demo:
         gr.Image("Travel_Tropical_Banner.png")
             
 
-    with gr.Row(scae=1):
+    with gr.Row(scale=1):
         name = gr.Textbox(
             placeholder="Type your name",
             label="Name"
