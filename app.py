@@ -96,7 +96,7 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
 
 
 def respond(message, history, user_location):
-
+     print(date_status)
     if user_location == "Bahamas":
         Bahamas_text = ""
         Bahamas_files = glob.glob("*Bahamas.txt")
