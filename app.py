@@ -282,6 +282,9 @@ with gr.Blocks(theme=custom_theme) as demo:
                 respond,
                 additional_inputs=[user_location]
             )
+
+        gr.Divider()
+        
 # --- RIGHT COLUMN: CALENDAR & PACKING LIST ---
         with gr.Column(scale=1):
             
