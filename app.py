@@ -313,7 +313,7 @@ with gr.Blocks(theme=custom_theme) as demo:
                 date_status = gr.Markdown("No dates saved yet.")
 
 
-            gr.Divider()
+            gr.HTML("<hr>")
             
         # --- TO-DO / PACKING LIST SECTION ---
             gr.Markdown("### 🧳 Packing List")
