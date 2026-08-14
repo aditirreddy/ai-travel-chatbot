@@ -296,7 +296,7 @@ with gr.Blocks(theme=custom_theme) as demo:
         )
 
     with gr.Row(scale=4):
-        with gr.Column(scale=3)
+        with gr.Column(scale=3):
             gr.ChatInterface(
                respond,
                additional_inputs=[user_location]
