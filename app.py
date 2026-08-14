@@ -281,10 +281,11 @@ def add_packing_item(new_item, current_list):
 def clear_packing_list():
     return gr.update(value =""), [], "Your packing list is empty."
 
-packing_state= gr.State(value={})
-trip_dates_state=gr.State(value={"start": None,"end": None})
+
     
 with gr.Blocks(theme=custom_theme) as demo:
+    packing_state= gr.State(value={})
+    trip_dates_state=gr.State(value={"start": None,"end": None})
     with gr.Row(scale=1):
         gr.Image("Travel_Tropical_Banner.png")
             
