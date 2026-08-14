@@ -302,7 +302,7 @@ with gr.Blocks(theme=custom_theme) as demo:
        
     
     with gr.Column():
-        with gr.Row()
+        with gr.Row():
             gr.Markdown("### 📅 Travel Dates")
             with gr.Group():
                 start_date = gr.DateTime(label="Arrival Date", type="string")
@@ -311,7 +311,7 @@ with gr.Blocks(theme=custom_theme) as demo:
                 date_status = gr.Markdown("No dates saved yet.")
 
 
-        with gr.Row()
+        with gr.Row():
         # --- TO-DO / PACKING LIST SECTION ---
             gr.Markdown("### 🧳 Packing List")
             with gr.Group():
