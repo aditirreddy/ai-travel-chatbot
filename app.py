@@ -95,8 +95,8 @@ def get_top_chunks(query, chunk_embeddings, text_chunks):
   return top_chunks
 
 
-def respond(message, history, user_location):
-    print(date_status)
+def respond(message, history, user_location,trip_dates_state):
+    print(trip_dates_state)
     if user_location == "Bahamas":
         Bahamas_text = ""
         Bahamas_files = glob.glob("*Bahamas.txt")
@@ -209,6 +209,7 @@ def respond(message, history, user_location):
 You are a budget-friendly travel agent chatbot.
 
  {name} selected {user_location}.
+ If dates are provided, use them: {trip_dates_state}. 
 
 You MUST answer using ONLY the information contained in the provided travel knowledge base context.
 
@@ -254,11 +255,12 @@ custom_theme = gr.themes.Soft(
 )
 
 # Function for saving travel dates
-def save_trip_dates(start_date, end_date):
+def save_trip_dates(start_date, end_date,current_dates):
     if not start_date or not end_date:
-        return "Please select both arrival and departure dates!"
-    trip_dates= f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
-    return trip_dates
+        return current_dates,"Please select both arrival and departure dates!"
+    current_dates={"start": start_date,"end": end_date}
+    status= f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
+    return current_dates,status
 
 # Functions for the To-Do / Packing List state management
 def add_packing_item(new_item, current_list):
@@ -279,7 +281,8 @@ def add_packing_item(new_item, current_list):
 def clear_packing_list():
     return gr.update(value =""), [], "Your packing list is empty."
 
-packing_state= gr.State(value=[])
+packing_state= gr.State(value={})
+trip_dates_state=gr.State(value={"start": None,"end": None})
     
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Row(scale=1):
@@ -308,7 +311,7 @@ with gr.Blocks(theme=custom_theme) as demo:
         with gr.Column(scale=3):
             gr.ChatInterface(
                respond,
-               additional_inputs=[user_location]
+               additional_inputs=[user_location,trip_dates_state]
         )
        
     
@@ -357,7 +360,7 @@ with gr.Blocks(theme=custom_theme) as demo:
     )
     
 # Calendar Handlers
-    save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date], outputs=[trip_dates,date_status])
+    save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date,trip_dates_state], outputs=[trip_dates_state,date_status])
 demo.launch(ssr_mode=False)
 
 
