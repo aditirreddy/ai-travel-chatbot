@@ -257,7 +257,8 @@ custom_theme = gr.themes.Soft(
 def save_trip_dates(start_date, end_date):
     if not start_date or not end_date:
         return "Please select both arrival and departure dates!"
-    return f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
+    trip_dates= f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
+    return trip_dates
 
 # Functions for the To-Do / Packing List state management
 def add_packing_item(new_item, current_list):
@@ -356,7 +357,7 @@ with gr.Blocks(theme=custom_theme) as demo:
     )
     
 # Calendar Handlers
-    save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date], outputs=[date_status])
+    save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date], outputs=[trip_dates,date_status])
 demo.launch(ssr_mode=False)
 
 
