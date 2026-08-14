@@ -258,6 +258,7 @@ def save_trip_dates(start_date, end_date):
     if not start_date or not end_date:
         return "Please select both arrival and departure dates!"
     return f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
+
     
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
@@ -288,23 +289,17 @@ with gr.Blocks(theme=custom_theme) as demo:
                 respond,
                 additional_inputs=[user_location]
             )
-
-        gr.Divider()
-        # Function for saving travel dates
-def save_trip_dates(start_date, end_date):
-    if not start_date or not end_date:
-        return "⚠️ Please select both arrival and departure dates."
-    return f"✅ **Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
-# --- RIGHT COLUMN: CALENDAR & PACKING LIST ---
-        with gr.Column(scale=1):
+       
+    
+    with gr.Column(scale=1):
             
             # --- CALENDAR SECTION ---
-            gr.Markdown("### 📅 Travel Dates")
-            with gr.Group():
-                start_date = gr.DateTime(label="Arrival Date", type="string")
-                end_date = gr.DateTime(label="Departure Date", type="string")
-                save_dates_btn = gr.Button("Save Dates", variant="secondary")
-                date_status = gr.Markdown("No dates saved yet.")
+        gr.Markdown("### 📅 Travel Dates")
+        with gr.Group():
+            start_date = gr.DateTime(label="Arrival Date", type="string")
+            end_date = gr.DateTime(label="Departure Date", type="string")
+            save_dates_btn = gr.Button("Save Dates", variant="secondary")
+            date_status = gr.Markdown("No dates saved yet.")
             
 # Calendar Handlers
     save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date], outputs=[date_status])
