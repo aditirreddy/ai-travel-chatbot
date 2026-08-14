@@ -301,26 +301,25 @@ with gr.Blocks(theme=custom_theme) as demo:
             )
        
     
-    with gr.Column(scale=1):
-            
-            # --- CALENDAR SECTION ---
-        gr.Markdown("### 📅 Travel Dates")
-        with gr.Group():
-            start_date = gr.DateTime(label="Arrival Date", type="string")
-            end_date = gr.DateTime(label="Departure Date", type="string")
-            save_dates_btn = gr.Button("Save Dates", variant="secondary")
-            date_status = gr.Markdown("No dates saved yet.")
+    with gr.Column():
+        with gr.Row()
+            gr.Markdown("### 📅 Travel Dates")
+            with gr.Group():
+                start_date = gr.DateTime(label="Arrival Date", type="string")
+                end_date = gr.DateTime(label="Departure Date", type="string")
+                save_dates_btn = gr.Button("Save Dates", variant="secondary")
+                date_status = gr.Markdown("No dates saved yet.")
 
 
-
+        with gr.Row()
         # --- TO-DO / PACKING LIST SECTION ---
-        gr.Markdown("### 🧳 Packing List")
-        with gr.Group():
-            item_input = gr.Textbox(
-                label="Add Item", 
-                placeholder="e.g., Sunscreen, Passport, Swimsuit...",
-                show_label=False
-            )
+            gr.Markdown("### 🧳 Packing List")
+            with gr.Group():
+                item_input = gr.Textbox(
+                    label="Add Item", 
+                    placeholder="e.g., Sunscreen, Passport, Swimsuit...",
+                    show_label=False
+                )
                 
             with gr.Row():
                 add_item_btn = gr.Button("Add", variant="secondary")
@@ -329,6 +328,7 @@ with gr.Blocks(theme=custom_theme) as demo:
                 # Display area for saved items
             packing_display = gr.Markdown("Your packing list is empty.")
 
+    
 # Packing List Handlers
     add_item_btn.click(
         add_packing_item, 
