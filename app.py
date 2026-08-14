@@ -311,7 +311,7 @@ with gr.Blocks(theme=custom_theme) as demo:
             save_dates_btn = gr.Button("Save Dates", variant="secondary")
             date_status = gr.Markdown("No dates saved yet.")
 
-        gr.Divider()
+
 
         # --- TO-DO / PACKING LIST SECTION ---
         gr.Markdown("### 🧳 Packing List")
