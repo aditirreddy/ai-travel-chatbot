@@ -282,8 +282,20 @@ with gr.Blocks(theme=custom_theme) as demo:
                 respond,
                 additional_inputs=[user_location]
             )
-
-
+# --- RIGHT COLUMN: CALENDAR & PACKING LIST ---
+        with gr.Column(scale=1):
+            
+            # --- CALENDAR SECTION ---
+            gr.Markdown("### 📅 Travel Dates")
+            with gr.Group():
+                start_date = gr.DateTime(label="Arrival Date", type="string")
+                end_date = gr.DateTime(label="Departure Date", type="string")
+                save_dates_btn = gr.Button("Save Dates", variant="secondary")
+                date_status = gr.Markdown("No dates saved yet.")
+            
+            gr.Divider()
+# Calendar Handlers
+    save_dates_btn.click(save_trip_dates, inputs=[start_date, end_date], outputs=[date_status])
 demo.launch(ssr_mode=False)
 
 
