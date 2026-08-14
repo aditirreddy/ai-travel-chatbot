@@ -253,6 +253,12 @@ custom_theme = gr.themes.Soft(
     font_mono=[gr.themes.GoogleFont("IBM Plex Mono"), "monospace"]
 )
 
+# Function for saving travel dates
+def save_trip_dates(start_date, end_date):
+    if not start_date or not end_date:
+        return "Please select both arrival and departure dates!"
+    return f"**Trip Dates Saved!**\n\n🛫 **Arrival:** {start_date}\n🛬 **Departure:** {end_date}"
+    
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Column():
         with gr.Row():
