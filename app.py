@@ -217,7 +217,7 @@ Do not use outside knowledge.
 Do not guess.
 Do not invent attractions, hotels, restaurants, prices, activities, facts, or recommendations.
 
-If the answer cannot be found in the provided context, say:
+Except for {name,user_location,trip_dates_state}, if the answer cannot be found in the provided context, say:
 "I don't have that information in my travel sources."
 
 Do not claim something is true unless it appears in the context.
