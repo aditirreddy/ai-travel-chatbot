@@ -273,38 +273,37 @@ def clear_packing_list():
 packing_state= gr.State([])
     
 with gr.Blocks(theme=custom_theme) as demo:
-    with gr.Column():
-        with gr.Row():
-            gr.Image("Travel_Tropical_Banner.png")
+    with gr.Row(scale=1):
+        gr.Image("Travel_Tropical_Banner.png")
             
 
-        with gr.Row():
-            name = gr.Textbox(
-                placeholder="Type your name",
-                label="Name"
-            )
+    with gr.Row(scae=1):
+        name = gr.Textbox(
+            placeholder="Type your name",
+            label="Name"
+        )
 
-            user_location = gr.Dropdown(
-                [
-                    "Puerto Rico",
-                    "Bahamas",
-                    "Jamaica",
-                    "Trinidad and Tobago",
-                    "Turks and Caicos",
-                    "Cuba"
-                ],
-                label="Where do you want to go?"
-            )
+        user_location = gr.Dropdown(
+            [
+                "Puerto Rico",
+                "Bahamas",
+                "Jamaica",
+                "Trinidad and Tobago",
+                "Turks and Caicos",
+                "Cuba"
+            ],
+            label="Where do you want to go?"
+        )
 
-        with gr.Row():
+    with gr.Row(scale=4):
+        with gr.Column(scale=3)
             gr.ChatInterface(
-                respond,
-                additional_inputs=[user_location]
-            )
+               respond,
+               additional_inputs=[user_location]
+        )
        
     
-    with gr.Column():
-        with gr.Row():
+        with gr.Column(scale=1):
             gr.Markdown("### 📅 Travel Dates")
             with gr.Group():
                 start_date = gr.DateTime(label="Arrival Date", type="string")
