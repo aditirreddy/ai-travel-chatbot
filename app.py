@@ -261,14 +261,17 @@ def save_trip_dates(start_date, end_date):
 
 # Functions for the To-Do / Packing List state management
 def add_packing_item(new_item, current_list):
-    if new_item.strip():
+    if current_list is None:
+        current_list = []
+        
+    if new_item and new_item.strip():
         current_list.append(new_item.strip())
     # Format list into bullet points for display
     formatted_list = "\n".join([f"• {item}" for item in current_list]) if current_list else "Your packing list is empty."
-    return "", current_list, formatted_list
+    return gr.update(value = ""), current_list, formatted_list
 
 def clear_packing_list():
-    return "", [], "Your packing list is empty."
+    return gr.update(value =""), [], "Your packing list is empty."
 
 packing_state= gr.State([])
     
