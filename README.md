@@ -79,4 +79,4 @@ Through this project and the AI/ML program, I gained hands-on experience with:
 ## Program
 
 Developed as a team capstone project during the **Kode With Klossy AI/ML Program — Summer 2026**.
-This Space was created for the KWK AI/ML capstone project. Happy building!
+Kode With Klossy AI/ML Program — Summer 2026.
