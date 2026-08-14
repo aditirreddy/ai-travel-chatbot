@@ -264,16 +264,21 @@ def add_packing_item(new_item, current_list):
     if current_list is None:
         current_list = []
         
-    if new_item and new_item.strip():
-        current_list.append(new_item.strip())
+    if new_item and str(new_item).strip():
+        current_list.append(str(new_item).strip())
+        
     # Format list into bullet points for display
-    formatted_list = "\n".join([f"• {item}" for item in current_list]) if current_list else "Your packing list is empty."
+    if current_list:
+        formatted_list = "\n".join([f"• {item}" for item in current_list])
+    else:
+        formatted_list = "Your packing list is empty."
+        
     return gr.update(value = ""), current_list, formatted_list
 
 def clear_packing_list():
     return gr.update(value =""), [], "Your packing list is empty."
 
-packing_state= gr.State([])
+packing_state= gr.State(value=[])
     
 with gr.Blocks(theme=custom_theme) as demo:
     with gr.Row(scale=1):
